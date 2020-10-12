@@ -1,0 +1,12 @@
+{
+  "name": "try-camera",
+  "displayName": "try-camera",
+  "expo": {
+    "name": "try-camera",
+    "slug": "try-camera",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
