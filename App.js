@@ -98,14 +98,18 @@ export default function App() {
         <Camera
           style={[
             styles.cameraPreview,
-            { marginTop: imagePadding * 10, marginBottom: -imagePadding * 8 },
+            { marginTop: imagePadding, marginBottom: imagePadding },
           ]}
           onCameraReady={setCameraReady}
           ratio={ratio}
           ref={(ref) => {
             setCamera(ref);
           }}
-        ></Camera>
+        >
+          <View style={styles.overlay}>
+            <View style={styles.overlay_center}></View>
+          </View>
+        </Camera>
       </View>
     );
   }
@@ -125,5 +129,17 @@ const styles = StyleSheet.create({
   },
   cameraPreview: {
     flex: 1,
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(52, 52, 108, 0.8)",
+  },
+  overlay_center: {
+    height: 250,
+    width: 250,
+    backgroundColor: "rgba(100,0,0,-0.8)",
+    borderRadius: 10,
   },
 });
