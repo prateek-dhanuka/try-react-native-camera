@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^8.4.5",
     "expo": "^39.0.3",
     "expo-camera": "~9.0.0",
     "expo-splash-screen": "~0.6.2",

@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Dimensions, Platform } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { Camera } from "expo-camera";
 import * as Permissions from "expo-permissions";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
   //  camera permissions
@@ -68,6 +76,11 @@ export default function App() {
     }
   };
 
+  // Button Click
+  const click = (iconName) => {
+    return () => console.log(`${iconName} clicked!`)
+  }
+
   // the camera must be loaded in order to access the supported ratios
   const setCameraReady = async () => {
     if (!isRatioSet) {
@@ -105,11 +118,31 @@ export default function App() {
           ref={(ref) => {
             setCamera(ref);
           }}
-        >
-          <View style={styles.overlay}>
-            <View style={styles.overlay_center}></View>
-          </View>
-        </Camera>
+        />
+        <View style={styles.overlay}>
+          {[
+            "brightness-auto",
+            "iso",
+            "flash-auto",
+            "photo-filter",
+            "pie-chart",
+          ].map((iconName) => (
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              key={iconName}
+              onPress={click(iconName)}
+            >
+              <MaterialIcons
+                name={iconName}
+                style={{ fontSize: 30, color: "white" }}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     );
   }
@@ -131,15 +164,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   overlay: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(52, 52, 108, 0.8)",
-  },
-  overlay_center: {
-    height: 250,
-    width: 250,
-    backgroundColor: "rgba(100,0,0,-0.8)",
-    borderRadius: 10,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    flexDirection: "row",
   },
 });
